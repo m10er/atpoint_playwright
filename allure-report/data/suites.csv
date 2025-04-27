@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","10089","Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(Deutsch)","chromium","Sun Apr 13 16:06:52 CEST 2025","passed","Sun Apr 13 16:07:02 CEST 2025","Contact test","Job.spec.ts","",""
+"","10689","Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(English)","chromium","Sun Apr 13 16:06:52 CEST 2025","passed","Sun Apr 13 16:07:03 CEST 2025","Contact test","Job.spec.ts","",""
