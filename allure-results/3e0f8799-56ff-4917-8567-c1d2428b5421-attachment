@@ -1,0 +1,71 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Job Bewerbung test >> Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(English)
+- Location: C:\Users\User\Desktop\infometis\tests\Job.spec.ts:23:7
+
+# Error details
+
+```
+Error: locator.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('First name*')
+
+    at TeamPageEng.fillJobApplyForm (C:\Users\User\Desktop\infometis\page-objects\teamPage\teamPageEng.ts:25:107)
+    at TeamPage.fillJobApplyForm (C:\Users\User\Desktop\infometis\page-objects\teamPage\teamPage.ts:25:9)
+    at C:\Users\User\Desktop\infometis\tests\Job.spec.ts:29:5
+```
+
+# Test source
+
+```ts
+   1 | import { Locator, Page } from '@playwright/test';
+   2 | import { TeamPageImp } from './teamPageImp';
+   3 | import { ApplyJobBody } from '../../pojos/ApplyJobBody';
+   4 |
+   5 | export class TeamPageEng implements TeamPageImp{
+   6 |
+   7 |     page:Page;
+   8 |     jobsLink: Locator;
+   9 |     allMandotoryWarning: Locator;
+  10 |     submitButton: Locator;
+  11 |     gettoKnowButton: Locator;
+  12 |
+  13 |     constructor(page:Page){
+  14 |         this.page=page;
+  15 |         this.jobsLink = page.getByText('JobsEstablishes consistent');
+  16 |         this.gettoKnowButton= page.getByRole('link', { name: 'Software Test Automation' });
+  17 |         this.allMandotoryWarning= page.locator('iframe[title="Shape 0"]').contentFrame().getByText('Please fill in all mandatory');
+  18 |         this.submitButton= page.locator('iframe[title="Shape 0"]').contentFrame().getByRole('button', { name: 'Submit' });
+  19 |     }
+  20 |     
+  21 |    
+  22 |
+  23 |     async fillJobApplyForm(user: ApplyJobBody):Promise<void> {
+  24 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('First name*').click();
+> 25 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('First name*').fill(user.name);
+     |                                                                                                           ^ Error: locator.fill: Target page, context or browser has been closed
+  26 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Surname*').click();
+  27 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Surname*').fill(user.lastName);
+  28 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('e-mail*').click();
+  29 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('e-mail*').fill(user.email);
+  30 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Phone number*').click();
+  31 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Phone number*').fill(user.phone);
+  32 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByRole('textbox', { name: 'CV*' }).setInputFiles(user.cv);
+  33 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Motivation*').click();
+  34 |         await this.page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Motivation*').fill(user.motivation);
+  35 |     }
+  36 |
+  37 |     
+  38 |     
+  39 |     
+  40 |     
+  41 |     
+  42 |
+  43 | }
+```

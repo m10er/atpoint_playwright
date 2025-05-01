@@ -1,0 +1,59 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Job Bewerbung test >> Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(English)
+- Location: C:\Users\User\Desktop\infometis\tests\Job.spec.ts:23:7
+
+# Error details
+
+```
+Error: expect(received).toBeTruthy()
+
+Received: false
+    at C:\Users\User\Desktop\infometis\tests\Job.spec.ts:31:85
+```
+
+# Test source
+
+```ts
+   1 | import { expect, test } from '../fixtures/ui-fixture';
+   2 | import { PageManagerDE } from '../page-objects/pageManagerDe';
+   3 | import { ApplyJobBody } from '../pojos/ApplyJobBody';
+   4 | import {DataManager} from '../env/dataManager';
+   5 |
+   6 | test.describe('Job Bewerbung test', () => {
+   7 |
+   8 |   const dataManager:DataManager= new DataManager();
+   9 |
+  10 |     test('Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(Deutsch)', async ({ pageManagerDE }) => {
+  11 |     await pageManagerDE.getHomePage().loadHomePage();
+  12 |     await pageManagerDE.getHomePage().cokieAccept();
+  13 |     await pageManagerDE.getHomePage().chooseLanguage("De");
+  14 |     await pageManagerDE.getHomePage().clickTeamLinkOnNavbar();
+  15 |     await pageManagerDE.getTeamPage().clickJobsLink();
+  16 |     await pageManagerDE.getTeamPage().clickGettoKnowButton();
+  17 |     await pageManagerDE.getTeamPage().fillJobApplyForm(dataManager.getTestData().getFakeApplyJobBody());
+  18 |     await pageManagerDE.getTeamPage().clickSubmitButton();
+  19 |     await expect(await pageManagerDE.getTeamPage().isAllMandotoryWarningVisible()).toBeTruthy();
+  20 |
+  21 |   });
+  22 |
+  23 |   test('Ohne Zustimmung zur Datennutzung sollte die Job Bewerbung fehlschlagen.(English)', async ({ pageManagerEng }) => {
+  24 |     await pageManagerEng.getHomePage().loadHomePage();
+  25 |     await pageManagerEng.getHomePage().cokieAccept();
+  26 |     await pageManagerEng.getHomePage().clickTeamLinkOnNavbar();
+  27 |     await pageManagerEng.getTeamPage().clickJobsLink();
+  28 |     await pageManagerEng.getTeamPage().clickGettoKnowButton();
+  29 |     await pageManagerEng.getTeamPage().fillJobApplyForm(dataManager.getTestData().getFakeApplyJobBody());
+  30 |     await pageManagerEng.getTeamPage().clickSubmitButton();
+> 31 |     await expect(await pageManagerEng.getTeamPage().isAllMandotoryWarningVisible()).toBeTruthy();
+     |                                                                                     ^ Error: expect(received).toBeTruthy()
+  32 |   });
+  33 | });
+  34 |
+```

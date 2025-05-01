@@ -1,0 +1,57 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Job Bewerbung test >> Ohne Motivation input einzugeben  sollte die Job Bewerbung fehlschlagen.(English)
+- Location: C:\Users\User\Desktop\infometis\tests\Job.spec.ts:21:7
+
+# Error details
+
+```
+Error: expect(received).toBeTruthy()
+
+Received: false
+    at C:\Users\User\Desktop\infometis\tests\Job.spec.ts:29:85
+```
+
+# Test source
+
+```ts
+   1 | import { expect, test } from '../fixtures/ui-fixture';
+   2 | import {DataManager} from '../env/dataManager';
+   3 |
+   4 | test.describe('Job Bewerbung test', () => {
+   5 |
+   6 |   const dataManager:DataManager= new DataManager();
+   7 |
+   8 |     test('Ohne Motivation input einzugeben sollte die Job Bewerbung fehlschlagen.(Deutsch)', async ({ pageManagerDE }) => {
+   9 |     await pageManagerDE.getHomePage().loadHomePage();
+  10 |     await pageManagerDE.getHomePage().cokieAccept();
+  11 |     await pageManagerDE.getHomePage().chooseLanguage("De");
+  12 |     await pageManagerDE.getHomePage().clickTeamLinkOnNavbar();
+  13 |     await pageManagerDE.getTeamPage().clickJobsLink();
+  14 |     await pageManagerDE.getTeamPage().clickGettoKnowButton();
+  15 |     await pageManagerDE.getTeamPage().fillJobApplyForm(dataManager.getTestData().getFakeApplyJobBody());
+  16 |     await pageManagerDE.getTeamPage().clickSubmitButton();
+  17 |     await expect(await pageManagerDE.getTeamPage().isAllMandotoryWarningVisible()).toBeTruthy();
+  18 |
+  19 |   });
+  20 |
+  21 |   test('Ohne Motivation input einzugeben  sollte die Job Bewerbung fehlschlagen.(English)', async ({ pageManagerEng }) => {
+  22 |     await pageManagerEng.getHomePage().loadHomePage();
+  23 |     await pageManagerEng.getHomePage().cokieAccept();
+  24 |     await pageManagerEng.getHomePage().clickTeamLinkOnNavbar();
+  25 |     await pageManagerEng.getTeamPage().clickJobsLink();
+  26 |     await pageManagerEng.getTeamPage().clickGettoKnowButton();
+  27 |     await pageManagerEng.getTeamPage().fillJobApplyForm(dataManager.getTestData().getFakeApplyJobBody());
+  28 |     await pageManagerEng.getTeamPage().clickSubmitButton();
+> 29 |     await expect(await pageManagerEng.getTeamPage().isAllMandotoryWarningVisible()).toBeTruthy();
+     |                                                                                     ^ Error: expect(received).toBeTruthy()
+  30 |   });
+  31 | });
+  32 |
+```

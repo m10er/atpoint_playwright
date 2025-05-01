@@ -1,0 +1,44 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\Users\User\Desktop\infometis\tests\test-1.spec.ts:3:5
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByText('JobsEstablishes consistent')
+
+    at C:\Users\User\Desktop\infometis\tests\test-1.spec.ts:8:54
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+   4 |   await page.goto('https://www.infometis.ch/');
+   5 |   await page.locator('[data-test-id="interactive-frame"]').contentFrame().getByRole('button', { name: 'Close' }).click();
+   6 |   await page.getByRole('button', { name: 'Okay' }).click();
+   7 |   await page.getByRole('navigation').getByRole('link', { name: 'Team', exact: true }).click();
+>  8 |   await page.getByText('JobsEstablishes consistent').click();
+     |                                                      ^ Error: locator.click: Test timeout of 30000ms exceeded.
+   9 |   await page.getByRole('link', { name: 'Software Test Automation' }).click();
+  10 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('First name*').click();
+  11 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('First name*').fill('cxzczx');
+  12 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Surname*').click();
+  13 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Surname*').fill('cxzczxcxzc');
+  14 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Phone number*').click();
+  15 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByPlaceholder('Phone number*').fill('ccxz');
+  16 |   await page.locator('iframe[title="Shape 0"]').contentFrame().getByRole('button', { name: 'Submit' }).click();
+  17 |   await expect(page.locator('iframe[title="Shape 0"]').contentFrame().getByRole('list')).toContainText('Please fill in all mandatory fields.');
+  18 | });
+```

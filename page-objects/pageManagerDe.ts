@@ -1,37 +1,28 @@
-import { JobPageDE } from './JobPage/jobPageDE';
-import { JobPage } from './JobPage/jobPage';
+import { HomePage } from './homePage/homePage';
 import { Page } from '@playwright/test';
-import { JobDetailPage } from './JobDetailPage/jobDetailPage';
-import { JobDetailPageDE } from './JobDetailPage/jobDetailPageDE';
-import { JobApplyPage } from './JobApplyPage/JobApplyPage';
+import { TeamPage } from './teamPage/teamPage';
+import { HomePageDe } from './homePage/homePageDe';
+import { TeamPageDe } from './teamPage/teamPageDe';
+
 
 export class PageManagerDE{
 
     page:Page;
-    private jobPage : JobPage;
-    private jobDetailPage:JobDetailPage;
-    private jobApplyPage:JobApplyPage;
+    private homePage:HomePage;
+    private teampage:TeamPage;
 
     constructor(page:Page){
         this.page=page;
-        this.jobPage = new JobPage(page, new JobPageDE(page));
-        this.jobDetailPage = new JobDetailPage(page, new JobDetailPageDE(page));
-        this.jobApplyPage= new JobApplyPage(page);
+        this.homePage = new HomePage(page, new HomePageDe(page));
+        this.teampage= new TeamPage(page, new TeamPageDe(page));
     }
 
-
-    getJobsPage(){
-        return this.jobPage;
+    getHomePage(){
+        return this.homePage;
     }
 
-    getJobsDetailPage(){
-        return this.jobDetailPage;
+    getTeamPage(){
+        return this.teampage;
     }
-
-    getJobsApplyPage(){
-        return this.jobApplyPage;
-    }
-
-
 
 }

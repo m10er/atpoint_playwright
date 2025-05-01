@@ -16,9 +16,9 @@ export class TestData {
             this.testEnv.getFakeEmail(),
             this.testEnv.getFakeFirstName(),
             this.testEnv.getFakeLastName(),
+            this.testEnv.getFakePhoneNumber(),
             ApplyJobBody.fromPath("env/documents/CVMuammer.pdf"),
-            ApplyJobBody.fromPath("env/documents/Muammer Öner referans.pdf"),
-
+            ""
         );
     }
 

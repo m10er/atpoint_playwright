@@ -1,0 +1,46 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\Users\User\Desktop\atpoint\tests\test-2.spec.ts:3:5
+
+# Error details
+
+```
+Error: locator.dblclick: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('link', { name: 'Software Test Automation' })
+    - waiting for" https://www.infometis.ch/infometen/software-test-automation-engineer-x-w-m" navigation to finish...
+    - navigated to "https://www.infometis.ch/infometen/software-test-automation-engineer-x-w-m"
+
+    at C:\Users\User\Desktop\atpoint\tests\test-2.spec.ts:12:70
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+   4 |   await page.goto('https://www.infometis.ch/infometen?category=Jobs');
+   5 |   await page.locator('nav').getByRole('link', { name: 'De' }).click();
+   6 |   await page.getByRole('list').filter({ hasText: 'Software Test Automation' }).click();
+   7 |   await page.locator('[data-test-id="interactive-frame"]').contentFrame().getByRole('button', { name: 'Close' }).click();
+   8 |   await expect(page.getByRole('link', { name: 'Software Test Automation' })).toBeVisible();
+   9 |   await expect(page.getByRole('link', { name: 'Software Test Automation' })).toBeVisible();
+  10 |   await expect(page.getByRole('link', { name: 'Software Test Automation' })).toBeVisible();
+  11 |   await page.getByRole('link', { name: 'Software Test Automation' }).dblclick();
+> 12 |   await page.getByRole('link', { name: 'Software Test Automation' }).dblclick();
+     |                                                                      ^ Error: locator.dblclick: Target page, context or browser has been closed
+  13 |   await page.goto('https://www.infometis.ch/infometen?category=Jobs');
+  14 |   await page.getByRole('link', { name: 'Software Test Automation' }).click();
+  15 |   await page.getByRole('link', { name: 'Software Test Automation' }).click();
+  16 |   await expect(page.getByRole('link', { name: 'Software Test Automation' })).toBeVisible();
+  17 |   await page.getByRole('link', { name: 'Software Test Automation' }).click();
+  18 | });
+```

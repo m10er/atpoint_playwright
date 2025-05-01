@@ -17,21 +17,23 @@ export class ApplyJobBody {
   email: string;
   name: string;
   lastName: string;
+  phone:string;
   cv: PlaywrightFile;
-  additionalDocument: PlaywrightFile;
-
+  motivation: string;
   constructor(
     email: string,
     name: string,
     lastName: string,
+    phone:string,
     cv: PlaywrightFile,
-    additionalDocument: PlaywrightFile
+    motivation:string
   ) {
     this.email = email;
     this.name = name;
     this.lastName = lastName;
+    this.phone= phone;
     this.cv = cv;
-    this.additionalDocument = additionalDocument;
+    this.motivation= motivation;
   }
 
   /**

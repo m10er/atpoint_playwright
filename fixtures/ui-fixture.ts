@@ -12,12 +12,14 @@ export const test = baseTest.extend<UiFixtures>({
     
     const pageManagerEng = new PageManagerEng(page);
     await use(pageManagerEng); 
+    await page.close();
   },
 
   pageManagerDE: async ({page}, use) => {
     
     const pageManagerDe = new PageManagerDE(page);
     await use(pageManagerDe); 
+    await page.close();
   },
 
 });

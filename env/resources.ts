@@ -1,27 +1,38 @@
+/**
+ * Interface defining the application's resource URLs
+ */
 interface Resources {
-    jobsUrl: string;
-  }
+  /** The base URL of the application */
+  readonly BASE_URL: string;
   
-  // Base URL
-  const BASE_URL = 'https://atpoint.ch';
-  
-  // Ortak path sabitleri
-  const PATHS = {
-    JOBS: '/jobs',
-  };
-  
-  // Dillerin kendi URL'leri
-  const BASE_URLS = {
-    DE: BASE_URL,
-    EN: `${BASE_URL}/en`,
-  };
-  
-  // Resources nesneleri
-  export const ResourcesDE: Resources = {
-    jobsUrl: `${BASE_URLS.DE}${PATHS.JOBS}`,
-  };
-  
-  export const ResourcesENG: Resources = {
-    jobsUrl: `${BASE_URLS.EN}${PATHS.JOBS}`,
-  };
-  
+  /** The URL for the contact page */
+  readonly KONTAKT_URL: string;
+}
+
+/**
+* Base URL for the application
+* @private
+*/
+const baseURL = "https://www.infometis.ch/";
+
+/**
+* Application resource URLs
+* Contains all the necessary URLs for the application
+* @constant
+*/
+export const Resources: Resources = {
+  BASE_URL: baseURL,
+  KONTAKT_URL: `${baseURL}kontakt/`
+} as const;
+
+/**
+* Gets the complete URL for a given path
+* @param path - The path to append to the base URL
+* @returns The complete URL
+*/
+export function getUrl(path: string): string {
+  return `${baseURL}${path}`;
+}
+
+
+
